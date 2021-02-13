@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Mail Sender</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <form action="#">
+
+                        <label for="text">Text</label>
+                        <input type="text" name="text">
+                        <br>
+                        <input type="submit">
+
+                    </form>
                 </div>
             </div>
         </div>
