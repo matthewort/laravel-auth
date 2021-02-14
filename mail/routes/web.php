@@ -11,3 +11,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/send/mail', 'HomeController@sendMail')->name('send-mail');
 Route::post('/send/empty/mail', 'HomeController@sendEmptyMail')->name('send-empty-mail');
+Route::post('/update/user/icon', 'HomeController@updateUserIcon')->name('update-icon');

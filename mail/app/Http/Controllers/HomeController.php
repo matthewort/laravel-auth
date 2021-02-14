@@ -36,4 +36,12 @@ class HomeController extends Controller
         -> send(new TestMail());
         return redirect() ->back();
     }
+
+    public function updateUserIcon(Request $request) {
+        // $data = $request -> validate([
+        //     'icon' => 'required|file' 
+        // ]);
+        // $image = $request -> file('icon');
+        dd($data, $image);
+    }
 }
