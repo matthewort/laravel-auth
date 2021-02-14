@@ -25,7 +25,18 @@
 
                     </form>
 
-                    <br><br>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Mail Sender</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                     <form action="{{route('send-empty-mail')}}" method="POST">
                         @csrf
@@ -35,6 +46,8 @@
                     </form>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
