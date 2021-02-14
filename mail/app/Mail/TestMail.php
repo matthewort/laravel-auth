@@ -11,23 +11,16 @@ class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    public $text;
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+    public function __construct($nonopt, $text = null) //inizializziamo text come stringa vuota, lo facciamo se non abbiamo parametri di ingresso nel "-> send(new TestMail());" all'interno del controller, se volessi inserire una seconda variabile dovrei metterla prima di $text = null a sinistra
+    {
+        $this -> text = $text;
+    }
     public function build()
     {
-        return $this->view('view.name');
+        return $this
+        ->from('no-reply@boolean.careers')
+        ->view('auth.mail.testMail');
     }
 }

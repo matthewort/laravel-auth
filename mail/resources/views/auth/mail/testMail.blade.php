@@ -7,12 +7,12 @@
     <title>Document</title>
     <style> /*perché qui ci va lo style?*/
         body, a {
-            background-color: aquamarine;
+            background-color: darkcyan;
             color: white;
         }
     </style>
 </head>
 <body>
-    <h1>Hello world</h1>
+    <h1>{{$text}} from Laravel mail</h1>
 </body>
 </html>

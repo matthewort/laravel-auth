@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+
+
 
 class HomeController extends Controller
 {
@@ -16,6 +21,19 @@ class HomeController extends Controller
         return view('home');
     }
     public function sendMail(Request $request) {
-        dd($request -> all());
+        $data = $request -> validate([
+            'text' => 'required|min:5' //a cosa corrisponde questo 'text'?
+        ]);
+        // dd($data);
+        Mail::to(Auth::user() -> email) //associo utente a email
+        -> send(new TestMail($data['text']));
+        return redirect() ->back(); //ritorna sulla pagina su cui lavoravo
+        // dd($request -> all());
+    }
+
+    public function sendEmptyMail() {
+        Mail::to(Auth::user() -> email) //associo utente a email
+        -> send(new TestMail());
+        return redirect() ->back();
     }
 }

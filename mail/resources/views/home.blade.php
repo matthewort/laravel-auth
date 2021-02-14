@@ -14,12 +14,23 @@
                         </div>
                     @endif
 
-                    <form action="#">
+                    <form action="{{route('send-mail')}}" method="POST">
+                        @csrf
+                        @method('POST')
 
                         <label for="text">Text</label>
                         <input type="text" name="text">
                         <br>
-                        <input type="submit">
+                        <input type="submit" value="SEND MAIL">
+
+                    </form>
+
+                    <br><br>
+
+                    <form action="{{route('send-empty-mail')}}" method="POST">
+                        @csrf
+                        @method('POST')
+                    <input type="submit" value="SEND EMPTY MAIL">
 
                     </form>
                 </div>
