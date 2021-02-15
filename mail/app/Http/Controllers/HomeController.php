@@ -25,7 +25,7 @@ class HomeController extends Controller
             'text' => 'required|min:5' //a cosa corrisponde questo 'text'?
         ]);
         // dd($data);
-        Mail::to(Auth::user() -> email) //associo utente a email
+        Mail::to(Auth::user() -> email) //associo utente a email, ma "user" ed "email" da dove li prendo?
         -> send(new TestMail($data['text']));
         return redirect() ->back(); //ritorna sulla pagina su cui lavoravo
         // dd($request -> all());
@@ -38,10 +38,14 @@ class HomeController extends Controller
     }
 
     public function updateUserIcon(Request $request) {
-        // $data = $request -> validate([
-        //     'icon' => 'required|file' 
-        // ]);
-        // $image = $request -> file('icon');
-        dd($data, $image);
+        $data = $request -> validate([
+            'icon' => 'required|file' 
+        ]);
+        $image = $request -> file('icon'); //"file" a cosa si riferisce?
+        $ext = $image -> getClientOriginalExtension(); //si riferisce all'estensione, ma è un linguaggio proprio di Laravel?
+        $name = rand(100000, 9999999) . '_' . time();
+        $destFile = $name . '.' . $ext;
+        dd($image, $ext, $name);
+        // dd($request -> all());
     }
 }

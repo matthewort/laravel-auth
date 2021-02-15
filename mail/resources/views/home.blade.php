@@ -18,7 +18,7 @@
                         @csrf
                         @method('POST')
 
-                        <input name="icon" class="form-control border-0">
+                        <input name="icon" type="file" class="form-control border-0">
                         <br>
                         <input type="submit" value="SEND MAIL">
 
