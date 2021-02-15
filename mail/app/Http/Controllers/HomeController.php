@@ -55,4 +55,12 @@ class HomeController extends Controller
         // dd($request -> all());
         return redirect() -> back();
     }
+
+    public function clearUserIcon() {
+        $user = Auth::user();
+        $user -> icon = null;
+        $user -> save();
+
+        return redirect() -> back();
+    }
 }

@@ -20,10 +20,9 @@
 
                         <input name="icon" type="file" class="form-control border-0">
                         <br>
-                        <input type="submit" value="UPDATE ICON">
-
+                        <input type="submit" class="btn btn-primary" value="UPDATE ICON">
+                        <a href="{{route('clear-icon')}}" class="btn btn-danger">CLEAR ICON</a>
                     </form>
-
                 </div>
             </div>
 
@@ -85,7 +84,7 @@
                 <div class="card-body">
                     <h1>Hello Lizard</h1>
                     <br>
-                    <img src="{{asset('storage/icon' . Auth::user() -> icon)}}">
+                    <img src="{{asset('storage/icon/' . Auth::user() -> icon)}}">
                 </div>
             </div>
             @endif
