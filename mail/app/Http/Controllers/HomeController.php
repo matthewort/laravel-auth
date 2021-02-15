@@ -80,6 +80,6 @@ class HomeController extends Controller
         $file = storage_path('app/public/icon/' . $fileName);
         $res = File::delete($file);
         // dd($file, $res);
-        } catch(\Exception $e) {}
+        } catch(\Exception $e) {} //vuol dire "entrami nel catch se si verifica un errore nel try", il backslash modo di dire di PHP per riferirsi a tutte le eccezioni
     }
 }
