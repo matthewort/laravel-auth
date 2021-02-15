@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
 use App\Mail\TestMail;
 
 
@@ -25,7 +26,7 @@ class HomeController extends Controller
             'text' => 'required|min:5' //a cosa corrisponde questo 'text'?
         ]);
         // dd($data);
-        Mail::to(Auth::user() -> email) //associo utente a email, ma "user" ed "email" da dove li prendo?
+        Mail::to(Auth::user() -> email) //associo utente a email, ma "user" ed "email" da dove li prendo? user appartiene all'auth user standard, email è il campo che c'è nelle migration
         -> send(new TestMail($data['text']));
         return redirect() ->back(); //ritorna sulla pagina su cui lavoravo
         // dd($request -> all());
@@ -33,7 +34,7 @@ class HomeController extends Controller
     }
 
     public function sendEmptyMail() {
-        Mail::to(Auth::user() -> email) //associo utente a email
+        Mail::to(Auth::user() -> email) //associo utente a email, email è il campo che è presente nella string della migration che andiamo a recuperare qui
         -> send(new TestMail());
         return redirect() ->back(); //cosa succederebbe se non mettessimo il back?
     }
@@ -42,6 +43,9 @@ class HomeController extends Controller
         $data = $request -> validate([
             'icon' => 'required|file' 
         ]);
+
+        $this -> deleteUserIcon();
+
         $image = $request -> file('icon'); //"file" a cosa si riferisce?
         $ext = $image -> getClientOriginalExtension(); //si riferisce all'estensione, ma è un linguaggio proprio di Laravel?
         $name = rand(100000, 999999) . '_' . time(); //time() è un dato temporale
@@ -57,10 +61,25 @@ class HomeController extends Controller
     }
 
     public function clearUserIcon() {
+
+        $this -> deleteUserIcon();
+
         $user = Auth::user();
         $user -> icon = null;
         $user -> save();
 
         return redirect() -> back();
+    }
+
+    private function deleteUserIcon() {
+        $user = Auth::user();
+
+        try { //non capisco il try catch
+        $fileName = $user -> icon;
+
+        $file = storage_path('app/public/icon/' . $fileName);
+        $res = File::delete($file);
+        // dd($file, $res);
+        } catch(\Exception $e) {}
     }
 }
