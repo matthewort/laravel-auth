@@ -45,7 +45,7 @@ class HomeController extends Controller
         $ext = $image -> getClientOriginalExtension(); //si riferisce all'estensione, ma è un linguaggio proprio di Laravel?
         $name = rand(100000, 9999999) . '_' . time();
         $destFile = $name . '.' . $ext;
-        dd($image, $ext, $name);
+        dd($image, $ext, $name, $destFile);
         // dd($request -> all());
     }
 }
