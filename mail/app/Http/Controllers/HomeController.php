@@ -44,7 +44,7 @@ class HomeController extends Controller
             'icon' => 'required|file' 
         ]);
 
-        $this -> deleteUserIcon();
+        $this -> deleteUserIcon(); //in questo modo cancello la prossima immagine che vado a salvare facendo in modo che l'icon si "aggiorni" invece di aggiungersi una sull'altra
 
         $image = $request -> file('icon'); //"file" a cosa si riferisce?
         $ext = $image -> getClientOriginalExtension(); //si riferisce all'estensione, ma è un linguaggio proprio di Laravel?
@@ -71,7 +71,7 @@ class HomeController extends Controller
         return redirect() -> back();
     }
 
-    private function deleteUserIcon() {
+    private function deleteUserIcon() { 
         $user = Auth::user();
 
         try { //non capisco il try catch
