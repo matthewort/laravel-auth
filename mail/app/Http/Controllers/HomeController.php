@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function sendEmptyMail() {
         Mail::to(Auth::user() -> email) //associo utente a email
         -> send(new TestMail());
-        return redirect() ->back();
+        return redirect() ->back(); //cosa succederebbe se non mettessimo il back?
     }
 
     public function updateUserIcon(Request $request) {
@@ -45,6 +45,7 @@ class HomeController extends Controller
         $ext = $image -> getClientOriginalExtension(); //si riferisce all'estensione, ma è un linguaggio proprio di Laravel?
         $name = rand(100000, 9999999) . '_' . time();
         $destFile = $name . '.' . $ext;
+        $file = $image -> storeAs('icon', $destFile, 'public'); //faccio in modo di generare una nuova immagine con codice diverso anche se viene caricata sempre la stessa immagine per permettere che possa essere caricata la stessa immagine da diversi utenti senza che si sovrascriva
         dd($image, $ext, $name, $destFile);
         // dd($request -> all());
     }
