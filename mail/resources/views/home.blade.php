@@ -20,7 +20,7 @@
 
                         <input name="icon" type="file" class="form-control border-0">
                         <br>
-                        <input type="submit" value="SEND MAIL">
+                        <input type="submit" value="UPDATE ICON">
 
                     </form>
 
@@ -75,7 +75,23 @@
                 </div>
             </div>
 
+            @if (Auth::user() -> icon) {{-- in prosa se l'utente ha un'icona diversa da null esegui questo, altrimenti non farlo --}}
 
+            <br>
+
+            <div class="card">
+                <div class="card-header">Icon</div>
+
+                <div class="card-body">
+                    <h1>Hello Lizard</h1>
+                    <br>
+                    <img src="{{asset('storage/icon' . Auth::user() -> icon)}}">
+                </div>
+            </div>
+            @endif
+       
+       
+       
         </div>
     </div>
 </div>

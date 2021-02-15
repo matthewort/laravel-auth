@@ -13,7 +13,7 @@ class TestMail extends Mailable
 
     public $text;
 
-    public function __construct($nonopt, $text = null) //inizializziamo text come stringa vuota, lo facciamo se non abbiamo parametri di ingresso nel "-> send(new TestMail());" all'interno del controller, se volessi inserire una seconda variabile dovrei metterla prima di $text = null a sinistra
+    public function __construct($nonopt, $text = null) //inizializziamo text come stringa vuota, lo facciamo se non abbiamo parametri di ingresso nel "-> send(new TestMail());" all'interno del controller, se volessi inserire una seconda variabile dovrei metterla prima di $text = null a sinistra perché $nonopt è un array
     {
         $this -> text = $text;
     }

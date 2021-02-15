@@ -29,6 +29,7 @@ class HomeController extends Controller
         -> send(new TestMail($data['text']));
         return redirect() ->back(); //ritorna sulla pagina su cui lavoravo
         // dd($request -> all());
+        // dd(Auth::user());
     }
 
     public function sendEmptyMail() {
@@ -43,10 +44,15 @@ class HomeController extends Controller
         ]);
         $image = $request -> file('icon'); //"file" a cosa si riferisce?
         $ext = $image -> getClientOriginalExtension(); //si riferisce all'estensione, ma è un linguaggio proprio di Laravel?
-        $name = rand(100000, 9999999) . '_' . time();
+        $name = rand(100000, 999999) . '_' . time(); //time() è un dato temporale
         $destFile = $name . '.' . $ext;
-        $file = $image -> storeAs('icon', $destFile, 'public'); //faccio in modo di generare una nuova immagine con codice diverso anche se viene caricata sempre la stessa immagine per permettere che possa essere caricata la stessa immagine da diversi utenti senza che si sovrascriva
-        dd($image, $ext, $name, $destFile);
+        $file = $image -> storeAs('icon', $destFile, 'public'); //salvo il file
+
+        $user = Auth::user();
+        $user -> icon = $destFile;
+        $user -> save(); //salvo il file nell'icon dello user nel db
+        // dd($image, $ext, $name, $destFile);
         // dd($request -> all());
+        return redirect() -> back();
     }
 }
